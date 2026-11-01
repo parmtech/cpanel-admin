@@ -2,61 +2,66 @@
 
 Project: cPanel Admin (Unofficial)  
 Repository: https://github.com/parmtech/cpanel-admin  
-Stage: P1 — Flutter Android foundation  
+Stage: P2 complete for initial Android foundation; P3 next  
 Updated: 2026-11-02  
-Current milestone: P1 — finish security scan policy and prep P2
+Current milestone: P3 — Tabbed workspace
 
 ## Product decisions
 - Public third-party project; clearly state unofficial status and do not imply cPanel endorsement.
 - Flutter/Dart selected for cross-platform direction; Flutter stable 3.47.5 is pinned.
 - Android first; iPhone/iPad planned on the same codebase.
-- Direct cPanel UAPI over HTTPS in MVP; no credential proxy/backend.
-- Multiple labeled profiles; each token in OS secure storage.
-- Feature availability depends on official UAPI support, server/provider configuration, and account permissions.
-- Native dashboard and common workflows; unsupported operations may link to cPanel only through a supported session flow.
-- Security and data integrity outrank feature count.
+- Direct cPanel UAPI over HTTPS; no credential proxy/backend.
+- Multiple labeled profiles; cPanel API tokens stay in Android secure storage.
+- The product direction now includes a high-performance tabbed workspace, native UAPI modules, supported cPanel panel browser access, and an optional “ParmTech AI Assistant.”
+- A cPanel API token authorizes UAPI calls. It does not itself create a cPanel web login session. cPanel documents WHM API 1 `create_user_session` for temporary SSO; that path needs WHM/reseller capability. See [cPanel SSO docs](https://api.docs.cpanel.net/guides/guide-to-api-authentication/guide-to-api-authentication-single-sign-on/) and [API token docs](https://api.docs.cpanel.net/cpanel/tokens).
+- Do not inject cPanel API tokens or OpenAI keys into WebView/page JavaScript. AI uses app-owned allowlisted UAPI tools and requires user approval for writes.
+- Feature availability depends on official UAPI support, server/provider configuration, and account permissions. Security and data integrity outrank feature count.
 
 ## Current repository state
-- README, product spec, roadmap, architecture, security policy, contributor guide, API capability matrix, and Android setup guide are present.
-- Flutter source app shell is in lib/main.dart. It has Overview, Tools, and Settings navigation with clearly marked planned capabilities.
-- Android platform files are generated from the pinned Flutter template in local setup and CI; generated platform files are not committed.
-- Android CI formats and analyzes lib/, builds a debug APK, and uploads the artifact.
-- Dependabot is configured for GitHub Actions and Pub.
-- Account profile storage, cPanel networking, and server operations are not implemented.
-- No tests were added or run in this turn.
+- README, product spec, roadmap, architecture, security policy, contributor guide, API capability matrix, Android setup, and handoff docs are present.
+- Flutter app uses Overview, Files, and Accounts navigation.
+- Android files are generated from Flutter template in local setup and CI; generated platform files are not committed.
+- Android CI generates the platform, adds INTERNET permission, formats/analyzes `lib/`, builds a debug APK, and uploads it.
+- Account profile CRUD and token storage, UAPI connection check, file listing, upload, and UTF-8 text download are implemented.
+- Tabbed workspace, authenticated panel WebView, AI assistant, binary download, other service modules, iOS packaging, and signed release build remain unimplemented.
+- Local workspace has no Flutter/Dart SDK; GitHub Actions is the build environment.
 
 ## Completed
-- [x] Confirmed parmtech/cpanel-admin is public and writable.
-- [x] Initialized product and security documentation.
-- [x] Added UAPI candidate matrix and recorded API limitations.
-- [x] Added Flutter 3.47.5 app shell, Android setup guide, CI, and dependency updates.
-- [x] Fixed analyzer failure caused by Flutter's generated sample test file; analyze only committed app source until test setup is added.
-- [x] Android CI passed formatting, analyzer, debug APK build, and artifact upload: https://github.com/parmtech/cpanel-admin/actions/runs/41341758985
-- [x] Debug APK artifact: cpanel-admin-debug, 69,902,306 bytes, SHA-256 da647929dd494d8fb1e68c1e188ce12777e80ae8e9724c9c874856ed8c48dd1b.
-- [x] Issue #1 tracks the remaining P1 foundation work: https://github.com/parmtech/cpanel-admin/issues/1
+- [x] Confirmed `parmtech/cpanel-admin` is a public repository.
+- [x] Added product and security documentation, UAPI capability matrix, contributor guide, and living handoff.
+- [x] Added Flutter 3.47.5 Android shell and CI.
+- [x] Added multiple cPanel profile CRUD, secure API token storage, connection check, and initial file workflows.
+- [x] Added Android network permission bootstrap to local setup and CI.
+- [x] Android CI passed format, analysis, debug APK build, and artifact upload for commit `497eb195e6fc440d02c6769817249fa91452bb7e`: https://github.com/parmtech/cpanel-admin/actions/runs/41343115932
+- [x] Debug APK artifact: `cpanel-admin-debug`, 162,837,871 bytes, SHA-256 `481d8f026ae1df3d6f01ea1e90c5c640f2aa632a83c08908bd2cfa47894cb8ab`. It is a debug build, not a signed release.
+- [x] GitHub issue #1 tracks Flutter foundation.
 
-## Validation
-- Local workspace has Java 17 but no Flutter or Dart SDK.
-- GitHub Actions verified Flutter 3.47.5, Android project generation, dependency resolution, Dart formatting, source analysis, Android debug APK build, and artifact upload.
-- No unit/widget tests were added or run.
-- The debug APK is a development artifact, not a signed release build.
+## Validation and limits
+- CI verified Flutter 3.47.5 scaffold generation, package resolution, source formatting, static analysis, APK compilation, and artifact upload.
+- No unit/widget tests or live cPanel calls were run in this turn.
+- The APK has not been manually installed on a device or emulator.
+- Current build only supports UTF-8 text downloads and uploads up to 50 MB.
+- AI and browser session features are not implemented.
+- “Luna 6 medium” is not assumed to be a supported OpenAI API model ID; model names must be selectable from supported API identifiers.
 
 ## Next actions
-1. Add a secret-scanning policy/check that is suitable for a public repository.
-2. Decide/add a project license, repository description, issue labels, and milestones.
-3. Proceed to secure account profiles: local model and CRUD UI; keep secrets in Android Keystore-backed storage.
-4. Then add a UAPI connection test using an explicitly configured disposable account, never a production credential by default.
-5. Later, validate exact UAPI schemas and file-transfer behavior.
+1. Build tab model and UI (open, close, switch, reorder, move) with every tab bound to a profile ID.
+2. Implement native UAPI destinations as tabs for documented features.
+3. Choose a valid panel-browser auth flow: cPanel login/session or WHM/reseller SSO; never promise API-token-only web login.
+4. Complete file manager UX and validate binary transfer/file mutation endpoints on a disposable account.
+5. Add optional OpenAI key/model configuration and an allowlisted assistant action layer with previews and approvals.
+6. Continue modules by documented UAPI capabilities, then iOS and signed Android release work.
 
 ## Resume instructions for every contributor
-1. Pull latest default branch; read this file plus product, roadmap, architecture, security, contribution, Android setup, and API matrix docs.
+1. Pull latest default branch; read this handoff plus product, roadmap, architecture, security, contribution, Android setup, and API matrix docs.
 2. Inspect repository and open issues before editing. Repository is the source of truth.
-3. Pick the earliest incomplete milestone unless owner reprioritizes.
+3. Pick the earliest incomplete roadmap task unless the owner reprioritizes.
 4. Verify official cPanel UAPI docs for each endpoint; document versions and permissions.
-5. Make focused changes and run relevant validation only when requested; record exact results.
-6. Update this handoff, roadmap, and affected docs before ending. Record commit/PR links, tests/validation, known issues, and next action.
-7. Never claim a feature/build/test is complete without code and evidence.
+5. Make focused changes; run relevant checks when requested; record exact results.
+6. Update this handoff, roadmap, and affected docs with milestone changes.
+7. Never claim a feature, build, live server call, or test is complete without code and evidence.
 
 ## Change log
-- 2026-11-02: Initial product plan and operating handoff added.
-- 2026-11-02: Added Flutter foundation; CI initially exposed a generated-template test mismatch, then passed after source-scoped analysis.
+- 2026-11-02: Initialized product plan and contributor handoff.
+- 2026-11-02: Added and built the first functional Android API/file-management MVP.
+- 2026-11-02: Expanded product direction to tabbed cPanel workspace and optional AI assistant.
