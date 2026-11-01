@@ -14,14 +14,14 @@ Update this roadmap and HANDOFF.md in the same pull request whenever milestone s
 Exit: documented scope, security requirements, and first acceptance criteria.
 
 ## P1 — Flutter Android shell
-- [x] Pin Flutter stable toolchain to 3.47.5 in the app setup and workflow.
-- [x] Add a responsive app shell with navigation, theme, accessible labels, and explicit planned-feature states.
-- [x] Add Android CI workflow for formatting, static analysis, and debug APK build.
+- [x] Pin Flutter stable toolchain to 3.47.5.
+- [x] Add responsive app shell with navigation, theme, accessible labels, and planned-feature states.
+- [x] Add CI for formatting, static analysis, and Android debug APK build.
 - [x] Add Dependabot updates for GitHub Actions and Dart packages.
-- [ ] Verify the first GitHub Actions run and fix any failures.
-- [ ] Add and run test coverage when explicitly requested.
-- [ ] Add secret-scanning policy/workflow.
-Exit: clean checkout builds reproducibly, CI is green, and the foundation acceptance criteria are met.
+- [x] First CI run passed: https://github.com/parmtech/cpanel-admin/actions/runs/41341758985
+- [ ] Add secret-scanning workflow/policy.
+- [ ] Add and run test coverage in a separately approved task.
+Exit: clean checkout builds reproducibly, CI is green, and foundation acceptance criteria are met.
 
 ## P2 — Secure account profiles
 - [ ] Profile fields: local ID, label, normalized host, port (2083 default), username, token reference.
@@ -35,7 +35,7 @@ Exit: multiple profiles stay isolated; no credential leaks.
 - [ ] HTTPS by default, reject invalid TLS, timeouts, cancellation, redacted errors.
 - [ ] Safe retries for idempotent reads only.
 - [ ] Map server/API errors to user guidance and detect capabilities.
-- [ ] Dashboard uses only validated UAPI data; do not promise disk usage because no equivalent UAPI function is currently confirmed.
+- [ ] Dashboard uses only validated UAPI data; no disk-usage promise without a supported UAPI function.
 Exit: connection test and supported dashboard data work against a disposable account.
 
 ## P4 — File manager
