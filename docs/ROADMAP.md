@@ -1,6 +1,6 @@
 # A–Z Roadmap
 
-Current phase: P1 preparation — Android foundation  
+Current phase: P1 — Flutter Android foundation  
 Updated: 2026-11-02
 
 Update this roadmap and HANDOFF.md in the same pull request whenever milestone status changes.
@@ -14,11 +14,14 @@ Update this roadmap and HANDOFF.md in the same pull request whenever milestone s
 Exit: documented scope, security requirements, and first acceptance criteria.
 
 ## P1 — Flutter Android shell
-- [ ] Select and pin Flutter/Dart toolchain.
-- [ ] Create app shell, navigation, theme, localization base, accessibility defaults.
-- [ ] Add CI for formatting, static analysis, unit tests, Android debug build.
-- [ ] Add dependency and secret-scanning policy.
-Exit: clean checkout builds reproducibly and CI is green.
+- [x] Pin Flutter stable toolchain to 3.47.5 in the app setup and workflow.
+- [x] Add a responsive app shell with navigation, theme, accessible labels, and explicit planned-feature states.
+- [x] Add Android CI workflow for formatting, static analysis, and debug APK build.
+- [x] Add Dependabot updates for GitHub Actions and Dart packages.
+- [ ] Verify the first GitHub Actions run and fix any failures.
+- [ ] Add and run test coverage when explicitly requested.
+- [ ] Add secret-scanning policy/workflow.
+Exit: clean checkout builds reproducibly, CI is green, and the foundation acceptance criteria are met.
 
 ## P2 — Secure account profiles
 - [ ] Profile fields: local ID, label, normalized host, port (2083 default), username, token reference.
@@ -74,4 +77,4 @@ Exit: tested on supported devices/OS versions and distribution requirements met.
 5. Reversible actions.
 6. Destructive operations only with safeguards.
 
-Definition of done: implementation, relevant tests, UX states, security review, docs, and handoff updated. A mocked call alone does not prove an endpoint is supported.
+Definition of done: implementation, relevant tests when authorized, UX states, security review, docs, and handoff updated. A mocked call alone does not prove an endpoint is supported.
