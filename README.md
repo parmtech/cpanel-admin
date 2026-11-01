@@ -11,7 +11,7 @@ The app cannot promise every cPanel screen or hosting-provider feature is availa
 
 ## Planned capabilities
 - Account profiles: add, test, rename, edit, select, and remove multiple accounts.
-- Dashboard: account identity, usage, service status, and shortcuts.
+- Dashboard: account identity, usage, service status, and shortcuts where UAPI supports them.
 - File manager: browse, upload, download, create folders, rename, move, copy, and delete where supported.
 - Later modules: domains, email, databases, backups, SSL, cron, and metrics.
 - Security: OS-backed credential storage, destructive-action confirmations, redacted diagnostics, and no secrets in source control.
@@ -19,6 +19,7 @@ The app cannot promise every cPanel screen or hosting-provider feature is availa
 ## Project documents
 - [Product requirements](docs/PRODUCT_SPEC.md)
 - [Roadmap](docs/ROADMAP.md)
+- [API capability matrix](docs/API_CAPABILITY_MATRIX.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Security policy](SECURITY.md)
 - [Contributor guide](CONTRIBUTING.md)
