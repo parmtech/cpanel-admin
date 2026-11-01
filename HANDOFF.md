@@ -4,7 +4,7 @@ Project: cPanel Admin (Unofficial)
 Repository: https://github.com/parmtech/cpanel-admin  
 Stage: Planning / foundation  
 Updated: 2026-11-02  
-Current milestone: P0 — foundation and API capability mapping
+Current milestone: P1 preparation — Android foundation
 
 ## Product decisions
 - Public third-party project; clearly state unofficial status and do not imply cPanel endorsement.
@@ -17,29 +17,34 @@ Current milestone: P0 — foundation and API capability mapping
 - Security and data integrity outrank feature count.
 
 ## Current repository state
-- README and initial product, roadmap, architecture, security, contribution, and handoff docs are present.
-- App source, CI, endpoint inventory, and release artifacts do not exist yet.
+- README, product spec, roadmap, architecture, security policy, contributor guide, living handoff, and initial API capability matrix are present.
+- API matrix is documentation research only. No endpoint has been live-tested against a cPanel server.
+- App source, CI, and release artifacts do not exist yet.
 
 ## Completed
 - [x] Confirmed parmtech/cpanel-admin is public and writable.
 - [x] Initialized product and security documentation.
 - [x] Defined milestone sequence and contributor handoff requirement.
-- [x] Linked official cPanel UAPI/token references.
+- [x] Researched initial official UAPI candidates for identity, Fileman, upload, domains, and disk usage.
+- [x] Recorded that cPanel documents no UAPI equivalent for legacy API 2 DiskUsage fetchdiskusage; do not silently add deprecated API 2 to the MVP dashboard.
+- [x] Recorded that generic binary download behavior still needs validation.
 
 ## Next actions
 1. Confirm repository description, license, and public name/disclaimer.
-2. Inventory official UAPI endpoints for identity/health, usage, file list, upload/download, safe file mutations.
-3. Select Flutter/Dart toolchain and create Android shell plus CI.
+2. Select Flutter/Dart versions supported by current Android tooling and pin them.
+3. Create app shell, navigation, accessibility/theme baseline, and Android CI.
 4. Implement secure profile storage and connection test.
-5. Build read-only file listing end-to-end before write actions.
+5. Confirm UAPI schemas against exact target cPanel versions; use a disposable test account before integrating any live feature.
+6. Implement read-only Fileman listing, then separately validate upload and binary download.
 
 ## Validation
 - Repository metadata and public visibility checked.
-- Documentation commits are the only work completed.
+- Documentation commits are the only implementation completed.
 - No application code, build, or app tests exist yet.
+- API research is based on official cPanel docs linked from docs/API_CAPABILITY_MATRIX.md, not live server behavior.
 
 ## Resume instructions for every contributor
-1. Pull latest default branch; read this file plus product, roadmap, architecture, security, and contribution docs.
+1. Pull latest default branch; read this file plus product, roadmap, architecture, security, contribution, and API matrix docs.
 2. Inspect repository and open issues before editing. Repository is the source of truth.
 3. Pick the earliest incomplete milestone unless owner reprioritizes.
 4. Verify official cPanel UAPI docs for each endpoint; document versions and permissions.
@@ -49,3 +54,4 @@ Current milestone: P0 — foundation and API capability mapping
 
 ## Change log
 - 2026-11-02: Initial product plan and operating handoff added.
+- 2026-11-02: Added UAPI capability matrix and documented disk-usage/download limitations.
