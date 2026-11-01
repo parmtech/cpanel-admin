@@ -244,7 +244,7 @@ class _FileManagerPageState extends State<FileManagerPage> {
         directory: _directory,
         fileName: file.name,
       );
-      await FilePicker.platform.saveFile(
+      await FilePicker.saveFile(
         fileName: file.name,
         bytes: utf8.encode(content),
         mimeType: 'text/plain',

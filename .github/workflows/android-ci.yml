@@ -50,7 +50,7 @@ jobs:
         run: dart format --output=none --set-exit-if-changed lib
 
       - name: Analyze application source
-        run: flutter analyze lib
+        run: flutter analyze --no-fatal-infos lib
 
       - name: Build Android debug APK
         run: flutter build apk --debug

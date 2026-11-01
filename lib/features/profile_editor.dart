@@ -232,7 +232,10 @@ class _ProfileEditorDialogState extends State<ProfileEditorDialog> {
       _connected = false;
     });
     try {
-      await widget.onTest(_profileDraft(), token);
+      await widget.onTest(
+        _profileDraft().toProfile(id: widget.profile?.id),
+        token,
+      );
       if (!mounted) return;
       setState(() {
         _busy = false;
