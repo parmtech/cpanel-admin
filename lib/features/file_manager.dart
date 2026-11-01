@@ -210,7 +210,7 @@ class _FileManagerPageState extends State<FileManagerPage> {
 
   Future<void> _uploadFile() async {
     try {
-      final file = await FilePicker.platform.pickFile();
+      final file = await FilePicker.pickFile();
       if (file == null) return;
       final length = file.lengthSync() ?? await file.length();
       if (length != null && length > 50 * 1024 * 1024) {
