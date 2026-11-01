@@ -1,6 +1,6 @@
 # A–Z Roadmap
 
-Current phase: P0 — foundation and API capability mapping  
+Current phase: P1 preparation — Android foundation  
 Updated: 2026-11-02
 
 Update this roadmap and HANDOFF.md in the same pull request whenever milestone status changes.
@@ -8,9 +8,9 @@ Update this roadmap and HANDOFF.md in the same pull request whenever milestone s
 ## P0 — Foundation
 - [x] Public repository created.
 - [x] Product direction, architecture, security, contribution, and handoff docs started.
+- [x] Initial official UAPI capability matrix and known gaps documented.
 - [ ] Confirm repository metadata, license choice, and project description.
-- [ ] Add issue labels and milestones.
-- [ ] Inventory official UAPI endpoints for MVP.
+- [ ] Add issue labels and milestone tracking.
 Exit: documented scope, security requirements, and first acceptance criteria.
 
 ## P1 — Flutter Android shell
@@ -32,14 +32,14 @@ Exit: multiple profiles stay isolated; no credential leaks.
 - [ ] HTTPS by default, reject invalid TLS, timeouts, cancellation, redacted errors.
 - [ ] Safe retries for idempotent reads only.
 - [ ] Map server/API errors to user guidance and detect capabilities.
-- [ ] Dashboard data calls behind capability checks.
-Exit: connection test/dashboard work against a disposable supported account.
+- [ ] Dashboard uses only validated UAPI data; do not promise disk usage because no equivalent UAPI function is currently confirmed.
+Exit: connection test and supported dashboard data work against a disposable account.
 
 ## P4 — File manager
-- [ ] Read-only file listing, breadcrumbs, sorting, refresh, search/filter.
+- [ ] Read-only Fileman listing, breadcrumbs, sorting, refresh, search/filter.
 - [ ] File details.
 - [ ] Upload progress/cancel and safe filename handling.
-- [ ] Download to a user-selected local destination.
+- [ ] Verify supported download/binary behavior before promising general downloads.
 - [ ] Create folder, rename, move/copy/delete only after endpoint support and confirmations.
 - [ ] Investigate large-file streaming and resumable transfer.
 Exit: manual QA on test account; no path traversal or account mix-up.
@@ -70,7 +70,7 @@ Exit: tested on supported devices/OS versions and distribution requirements met.
 1. Security and data integrity.
 2. Stable account setup and clear errors.
 3. Common read-only workflows.
-4. Upload/download.
+4. Upload/download after endpoint validation.
 5. Reversible actions.
 6. Destructive operations only with safeguards.
 
