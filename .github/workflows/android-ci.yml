@@ -37,6 +37,9 @@ jobs:
       - name: Generate Android platform scaffold
         run: flutter create --platforms=android --org au.parmtech --project-name cpanel_admin .
 
+      - name: Add Android internet permission
+        run: python3 tool/ensure_android_internet.py
+
       - name: Resolve dependencies
         run: flutter pub get
 

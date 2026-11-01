@@ -1,37 +1,30 @@
-# cPanel Admin (Unofficial)
+# cPanel Admin
 
-A secure, cross-platform mobile companion for managing cPanel accounts. Android is the first target; iPhone and iPad are planned on the same Flutter codebase.
+Unofficial Flutter companion app for managing cPanel accounts from Android. The app connects directly to each server's cPanel UAPI over HTTPS.
 
-> Unofficial project: not affiliated with, endorsed by, or supported by cPanel, L.L.C. cPanel is a trademark of its respective owner.
+## Working in this build
 
-## Product direction
-Manage multiple cPanel accounts from one app. Save each profile with a user-chosen label, server host, username, and API token. Select an account and use a native dashboard and tools for operations available through cPanel UAPI and permitted by the account.
+- Save multiple cPanel profiles with labels, host, port, username, and API token.
+- Store API tokens in Android encrypted storage; profile metadata is stored separately.
+- Test a profile's API connection and switch between saved accounts.
+- Browse directories starting at `public_html`.
+- Upload files up to 50 MB and download UTF-8 text files through cPanel UAPI.
 
-The app cannot promise every cPanel screen or hosting-provider feature is available through the API. Unsupported operations should be identified clearly and may link to the cPanel interface.
+## Build
 
-## Planned capabilities
-- Account profiles: add, test, rename, edit, select, and remove multiple accounts.
-- Dashboard: account identity, usage, service status, and shortcuts where UAPI supports them.
-- File manager: browse, upload, download, create folders, rename, move, copy, and delete where supported.
-- Later modules: domains, email, databases, backups, SSL, cron, and metrics.
-- Security: OS-backed credential storage, destructive-action confirmations, redacted diagnostics, and no secrets in source control.
+Use Flutter 3.47.5 or newer stable and Android SDK tools:
 
-## Project documents
-- [Product requirements](docs/PRODUCT_SPEC.md)
-- [Roadmap](docs/ROADMAP.md)
-- [API capability matrix](docs/API_CAPABILITY_MATRIX.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Android setup](docs/ANDROID_SETUP.md)
-- [Security policy](SECURITY.md)
-- [Contributor guide](CONTRIBUTING.md)
-- [Living handoff](HANDOFF.md)
+```sh
+flutter create --platforms=android --org au.parmtech --project-name cpanel_admin .
+python3 tool/ensure_android_internet.py
+flutter pub get
+flutter run
+```
 
-## Status
-Android app shell is in progress. Account storage and live cPanel features are not implemented yet. Read HANDOFF.md before starting work.
+GitHub Actions builds a debug APK and uploads it as the `cpanel-admin-debug` artifact. Debug APKs are for installation and evaluation; they are not signed release builds.
 
-Use only accounts and API tokens you are authorized to manage. Prefer a dedicated token and revoke it if exposed. Never place credentials in issues, pull requests, screenshots, fixtures, or logs.
+## Security and scope
 
-## References
-- [cPanel UAPI documentation](https://api.docs.cpanel.net/)
-- [API Tokens in cPanel](https://api.docs.cpanel.net/cpanel/tokens)
-- [Manage API Tokens interface](https://docs.cpanel.net/cpanel/security/manage-api-tokens/)
+Use a dedicated cPanel API token with only the permissions needed. The token stays on device and is sent directly to the configured server over HTTPS. Never commit tokens or server credentials. Self-signed TLS certificates are not accepted.
+
+This is an early Android MVP, not a complete cPanel feature set. Binary file downloads, file deletion/rename, databases, email, domains, backups, server administration, iOS packaging, and release signing remain future work. File downloads in this build are limited to UTF-8 text supported by the cPanel endpoint.
