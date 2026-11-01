@@ -21,12 +21,13 @@ The app cannot promise every cPanel screen or hosting-provider feature is availa
 - [Roadmap](docs/ROADMAP.md)
 - [API capability matrix](docs/API_CAPABILITY_MATRIX.md)
 - [Architecture](docs/ARCHITECTURE.md)
+- [Android setup](docs/ANDROID_SETUP.md)
 - [Security policy](SECURITY.md)
 - [Contributor guide](CONTRIBUTING.md)
 - [Living handoff](HANDOFF.md)
 
 ## Status
-Planning / foundation stage. No app implementation or release build is claimed yet. Read HANDOFF.md before starting work.
+Android app shell is in progress. Account storage and live cPanel features are not implemented yet. Read HANDOFF.md before starting work.
 
 Use only accounts and API tokens you are authorized to manage. Prefer a dedicated token and revoke it if exposed. Never place credentials in issues, pull requests, screenshots, fixtures, or logs.
 
